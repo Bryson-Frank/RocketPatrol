@@ -4,5 +4,17 @@ class Rocket extends Phaser.GameObjects.Sprite {
 
         //add to scene
         scene.add.existing(this);
+        this.isFiring = false;
+        this.moveSpeed = 2; //Pixels per frame
+    }
+
+    update() {
+        if (!this.isFiring) {
+            if (keyLEFT.isDown && this.x >= borderUISize + this.width) {
+                this.x -= this.moveSpeed
+            } else if (keyRIGHT.isDown && this.x <= game.config.width - (borderUISize + this.width)) {
+                this.x += this.moveSpeed
+            }
+        }
     }
 }
