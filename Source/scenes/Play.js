@@ -33,6 +33,22 @@ class Play extends Phaser.Scene {
         keyRIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
 
         this.anims.create({key: 'explode', frames: this.anims.generateFrameNumbers('explosion', {start: 0, end: 9, first: 0}), frameRate: 30});
+        
+        this.p1Score = 0;
+
+        let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#f3b141',
+            color: '#843605',
+            altgn: 'right',
+            padding: {
+                top: 5,
+                bottom: 5
+            },
+            fixedWidth: 100
+        }
+        this.scoreLeft = this.add.text(borderPadding + borderUISize, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
     }
     update() {
         this.starfield.tilePositionX -= 4;
