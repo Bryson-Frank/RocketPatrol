@@ -41,7 +41,7 @@ class Play extends Phaser.Scene {
             fontSize: '28px',
             backgroundColor: '#f3b141',
             color: '#843605',
-            altgn: 'right',
+            align: 'right',
             padding: {
                 top: 5,
                 bottom: 5
@@ -54,15 +54,18 @@ class Play extends Phaser.Scene {
 
         //play clock
         scoreConfig.fixedWidth = 0,
-        this.clock = this.time.delayedCall(60000, () => {
+        this.clock = this.time.delayedCall(game.settings.gameTimer, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
-            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (r) to Resart', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (r) to Resart or ← for the Menu', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
         }, null, this);
     }
     update() {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart();
+        }
+        if(this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)){
+            this.scene.start('menuScene');
         }
         this.starfield.tilePositionX -= 4;
         if (!this.gameOver) {
