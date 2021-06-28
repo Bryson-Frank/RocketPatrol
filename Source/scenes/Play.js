@@ -54,7 +54,7 @@ class Play extends Phaser.Scene {
 
         //play clock
         scoreConfig.fixedWidth = 0,
-        this.clock = this.time.delayedCall(1000, () => { //HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+        this.clock = this.time.delayedCall(60000, () => {
             this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
             this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (r) to Resart', scoreConfig).setOrigin(0.5);
             this.gameOver = true;
@@ -95,6 +95,7 @@ class Play extends Phaser.Scene {
     shipExplode(ship) {
         ship.alpha = 0; //hide ship
         let boom = this.add.sprite(ship.x, ship.y, 'explosion').setOrigin(0,0);
+        this.sound.play('sfx_explosion');
         boom.anims.play('explode');
         boom.on('animationcomplete', () => {
             ship.reset();
