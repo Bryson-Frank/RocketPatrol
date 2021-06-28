@@ -17,9 +17,9 @@ class Play extends Phaser.Scene {
         //greem ui background
         this.add.rectangle(0, borderUISize + borderPadding, game.config.width, borderUISize * 2, 0x00FF00).setOrigin(0,0);
         //white top bar
-        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xffffff0).setOrigin(0,0);
+        this.add.rectangle(0, 0, game.config.width, borderUISize, 0xffffff).setOrigin(0,0);
         this.add.rectangle(0, game.config.height - borderUISize, game.config.width, borderUISize, 0xffffff).setOrigin(0,0);
-        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xffffff0).setOrigin(0,0);
+        this.add.rectangle(0, 0, borderUISize, game.config.height, 0xffffff).setOrigin(0,0);
         this.add.rectangle(game.config.width - borderUISize, 0, borderUISize, game.config.height, 0xffffff).setOrigin(0,0);
 
         this.p1Rocket = new Rocket(this, game.config.width / 2, game.config.height - (borderUISize + borderPadding), 'rocket').setOrigin(0.5, 0);
@@ -49,6 +49,13 @@ class Play extends Phaser.Scene {
             fixedWidth: 100
         }
         this.scoreLeft = this.add.text(borderPadding + borderUISize, borderUISize + borderPadding * 2, this.p1Score, scoreConfig);
+
+        //play clock
+        scoreConfig.fixedWidth = 0,
+        this.clock = this.time.delayedCall(60000, () => {
+            this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+            this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (r) to Resart', scoreConfig).setOrigin(0.5);
+        }, null, this);
     }
     update() {
         this.starfield.tilePositionX -= 4;
@@ -86,5 +93,9 @@ class Play extends Phaser.Scene {
             ship.alpha = 1;
             boom.destroy();
         });
+
+        //update score
+        this.p1Score += ship.points;
+        this.scoreLeft.text = this.p1Score;
     }
 }
