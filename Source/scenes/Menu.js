@@ -6,9 +6,9 @@ class Menu extends Phaser.Scene {
 
     }
     preload() {
-        this.load.audio('sfx_select', 'https://bryson-frank.github.io/RocketPatrol/assets/blip_select12.wav');
-        this.load.audio('sfx_explosion', 'https://bryson-frank.github.io/RocketPatrol/assets/explosion38.wav');
-        this.load.audio('sfx_rocket', 'https://bryson-frank.github.io/RocketPatrol/assets/rocket_shot.wav');
+        this.load.audio('sfx_select', './assets/blip_select12.wav');
+        this.load.audio('sfx_explosion', './assets/explosion38.wav');
+        this.load.audio('sfx_rocket', './assets/rocket_shot.wav');
     }
     create() {
 
